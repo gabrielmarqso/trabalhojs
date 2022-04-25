@@ -19,18 +19,65 @@
         <input id="texto-paragrafo" type="text"><br>
         <br>
 
+        <p id="erro-inserir"></p>
         <button id="btnInserir">Inserir Parágrafo</button><br><br>
+        
 
         <label>Digite o nº do parágrafo para remover</label><br>
         <button id="BtnRemover">Remover Parágrafo</button>
         <input id="numero-paragrafo" type="text" size="5">
+        <p id="erro-remover"></p>
         <br>
     </form>
 
-    <div id="caixa"></div>
+    <div id="caixa">
+        
+    </div>
 
     <script>
-        //
+        
+        const caixa = document.getElementById("caixa")
+        
+        let qtdP = 0;
+        const inserir = document.getElementById("btnInserir")
+        const remover = document.getElementById("BtnRemover")
+        
+        inserir.addEventListener('click', function(){
+            const texto = (document.getElementById("texto-paragrafo"));
+            
+            if(texto.value === ""){
+                document.getElementById("erro-inserir").innerText = "Você deve inserir um parágrafo!"
+                console.log("erroo")
+
+            }else{
+                console.log("ta indo")
+                var p = document.createElement("p")
+                caixa.appendChild(p)
+                p.appendChild(document.createTextNode(texto.value))
+                console.log(caixa.children.length)
+            }
+
+        })
+
+        remover.addEventListener('click', function(){
+            var numero = document.getElementById("numero-paragrafo").value;
+            if(numero > (caixa.children.length-1)){
+                document.getElementById("erro-remover").innerText = "O número do parágrafo não é válido"
+            }else{
+                const remocao = caixa.getElementsByTagName('p')[numero]
+                console.log(numero)
+    
+                remocao.remove();
+
+            }
+        })
+
+
+
+        var numeroP = document.getElementById("numero-paragrafo").value
+
+
+
     </script>
 
 </body>
